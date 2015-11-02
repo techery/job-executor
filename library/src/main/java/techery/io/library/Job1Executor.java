@@ -1,6 +1,7 @@
 package techery.io.library;
 
 import rx.Observable;
+import rx.functions.Func0;
 import rx.functions.Func1;
 
 public class Job1Executor<T, R> extends JobExecutor<R> {
@@ -11,12 +12,17 @@ public class Job1Executor<T, R> extends JobExecutor<R> {
         observableFactory = factory;
     }
 
-    public Observable<Job<R>> createJobWith(T arg) {
-        return createInternally(Observable.defer(() -> observableFactory.call(arg)));
+    public Observable<Job<R>> createJobWith(final T arg) {
+        return createInternally(Observable.defer(new Func0<Observable<R>>() {
+            @Override
+            public Observable<R> call() {
+                return observableFactory.call(arg);
+            }
+        }));
     }
 
     public Observable<R> createPlainJobWith(T arg) {
-        return createJobWith(arg).compose(new JobToValue<>());
+        return createJobWith(arg).compose(new JobToValue<R>());
     }
 
     public void executeJobWith(T arg) {

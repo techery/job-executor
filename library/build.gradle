@@ -1,7 +1,5 @@
 apply plugin: 'com.android.library'
-apply plugin: 'me.tatarka.retrolambda'
 apply plugin: 'com.github.dcendents.android-maven'
-
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
@@ -18,10 +16,6 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
 
     dexOptions {
         preDexLibraries = rootProject.ext.preDexLibs
@@ -37,7 +31,6 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'io.reactivex:rxandroid:1.0.1'
     compile 'io.reactivex:rxjava:1.0.14'
-    retrolambdaConfig 'net.orfjackal.retrolambda:retrolambda:2.0.6'
 }
 
 task sourcesJar(type: Jar) {

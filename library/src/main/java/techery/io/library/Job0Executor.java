@@ -12,11 +12,16 @@ public class Job0Executor<R> extends JobExecutor<R> {
     }
 
     public Observable<Job<R>> createJob() {
-        return createInternally(Observable.defer(() -> observableFactory.call()));
+        return createInternally(Observable.defer(new Func0<Observable<R>>() {
+            @Override
+            public Observable<R> call() {
+                return observableFactory.call();
+            }
+        }));
     }
 
     public Observable<R> createPlainJob() {
-        return createJob().compose(new JobToValue<>());
+        return createJob().compose(new JobToValue<R>());
     }
 
     public void executeJob() {
