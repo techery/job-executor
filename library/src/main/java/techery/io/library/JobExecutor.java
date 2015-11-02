@@ -3,7 +3,6 @@ package techery.io.library;
 import rx.Observable;
 import rx.observables.ConnectableObservable;
 import rx.subjects.PublishSubject;
-import timber.log.Timber;
 
 import static techery.io.library.Job.JobStatus.FAIL;
 import static techery.io.library.Job.JobStatus.PROGRESS;
@@ -48,16 +47,13 @@ public abstract class JobExecutor<T> {
         return source
                 .flatMap(item -> Observable.just(Job.<T>builder().status(SUCCESS).value(item).create()))
                 .doOnSubscribe(() -> {
-                    Timber.d("Job started");
                     Job<T> progressSignal = Job.<T>builder().status(PROGRESS).create();
                     pipeline.onNext(progressSignal);
                 })
                 .onErrorReturn(e -> {
-                    Timber.w(e, "Job failed");
                     return Job.<T>builder().status(FAIL).error(e).create();
                 })
                 .doOnNext(job -> {
-                    Timber.d("Job finished: %s", job);
                     pipeline.onNext(job);
                 });
     }
