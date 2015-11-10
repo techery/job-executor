@@ -1,4 +1,4 @@
-package techery.io.library;
+package techery.io.library.jobexecutors;
 
 import rx.Observable;
 import rx.functions.Action0;
@@ -6,10 +6,11 @@ import rx.functions.Action1;
 import rx.functions.Func1;
 import rx.observables.ConnectableObservable;
 import rx.subjects.PublishSubject;
+import techery.io.library.jobs.Job;
 
-import static techery.io.library.Job.JobStatus.FAIL;
-import static techery.io.library.Job.JobStatus.PROGRESS;
-import static techery.io.library.Job.JobStatus.SUCCESS;
+import static techery.io.library.jobs.Job.JobStatus.FAIL;
+import static techery.io.library.jobs.Job.JobStatus.PROGRESS;
+import static techery.io.library.jobs.Job.JobStatus.SUCCESS;
 
 public abstract class JobExecutor<T> {
 

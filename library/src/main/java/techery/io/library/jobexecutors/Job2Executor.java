@@ -1,8 +1,10 @@
-package techery.io.library;
+package techery.io.library.jobexecutors;
 
 import rx.Observable;
 import rx.functions.Func0;
 import rx.functions.Func2;
+import techery.io.library.jobs.Job;
+import techery.io.library.jobutils.JobToValue;
 
 public class Job2Executor<T1, T2, R> extends JobExecutor<R> {
 

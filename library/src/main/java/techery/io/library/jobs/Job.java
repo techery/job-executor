@@ -1,4 +1,4 @@
-package techery.io.library;
+package techery.io.library.jobs;
 
 public class Job<T> {
     public enum JobStatus {

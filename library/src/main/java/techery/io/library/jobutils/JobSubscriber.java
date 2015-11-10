@@ -1,8 +1,9 @@
-package techery.io.library;
+package techery.io.library.jobutils;
 
 import rx.Subscriber;
 import rx.functions.Action0;
 import rx.functions.Action1;
+import techery.io.library.jobs.Job;
 
 public class JobSubscriber<T> extends Subscriber<Job<T>> {
 

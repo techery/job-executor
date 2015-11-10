@@ -1,7 +1,8 @@
-package techery.io.library;
+package techery.io.library.jobutils;
 
 import rx.Observable;
 import rx.functions.Func1;
+import techery.io.library.jobs.Job;
 
 public class JobToValue<T> implements Observable.Transformer<Job<T>, T> {
     @Override public Observable<T> call(Observable<Job<T>> jobObservable) {
